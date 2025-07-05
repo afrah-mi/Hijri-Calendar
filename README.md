@@ -28,6 +28,9 @@ This calendar solves those problems by:
 # Social Impact 🌎
 This project is an act of cultural preservation and decolonization. By creating a Hijri-first calendar that’s accurate and appealing, it helps reconnect users with their faith, history, and heritage. It's especially useful for Muslims living in non-Muslim majority countries who want to honor fasting schedules, spiritual dates, and cultural continuity.
 
+# Technical Details
+This program uses html, CSS, and Java script. An API (https://aladhan.com/islamic-calendar-api) is used to pull hijri-georgian dates that are confirmed. A loop is put in place to check the moon and time of sunset (maghrib) and update the dates accordingly. 
+
 # Setup and Usage 📆
 1. Clone the repository
 2. Open the calendar simply by writing main.html in the browser
