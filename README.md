@@ -13,6 +13,7 @@ Digital Hijri calendars today:
 * Have discrepency for when the year starts, for example they do not specify if Muharram 1 begins on June 25 or June 26 (correct answer: neither!)
 * Predicting furutre months using mathematical models, rather than traditionally following moon sightings, losing the culture of patience
 * Do not actually display the moon, leaving users ignorant to the traditional understanding of how to tell the time of month through looking at the sky
+
 Due to all these factors, the lunar, or hijri, calendar is pretty much discarded. The public often expresses frustration on not knowing when hijri days of importance will occur (ie. 10th Muharram, Ramadan, Eid, fasting etc.) and non-religious people have dificulty coordinating accomodations. Furthermore, this contributes to a growing disconnect from history and identity, as Gregorian systems dominate due to colonial legacy
 
 # Solution 💚
