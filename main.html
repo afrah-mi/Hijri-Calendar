@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Arsenal' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <title>Hijri Calendar</title> <!--tab title-->
+  <style>
+
+    body {
+      font-family: 'Arsenal';
+      text-align: center;
+      background: #000007; 
+      margin: 0.5em;
+      padding: 0.8em;
+    }
+
+    .calendar-card {
+      background: rgb(253, 255, 225); /*253, 255, 225*/
+      box-shadow: 0 0 20px 5px rgba(255, 255, 58, 0.3); /* Glow effect */
+      padding: 0.2em 0.4em;
+      border-radius: 15px;
+      max-width: 300px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 0.1em;
+    }
+
+    .date-display {
+      font-size: 1.25em;
+      margin-top: 0.1em;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns */
+      grid-template-rows: repeat(3, auto);   /* 3 rows */
+      gap: 1.1rem;                              /* spacing between boxes */
+      padding: 0.3rem;
+      max-width: 1500px;
+      margin: 1rem auto;
+      margin-bottom: 0rem;
+    }
+
+    .month-box {
+      position: relative; 
+    background: #000000;
+    color: #fefefe;
+    border-radius: 0px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 0 12px rgb(255, 255, 150);
+    transition: 0.2s ease;
+    }
+/*what happens when mouse is hovering over a month*/
+    .month-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgb(151, 151, 140);
+    cursor: pointer;
+    }
+/*what happens when it is clicked*/
+    .month-box:active {
+        transform: scale(1);
+        background:  rgb(31, 31, 19);
+    }
+
+    
+    .month-box .arabic {
+    font-family: 'Amiri', serif;
+    font-size: 3em;
+    padding: 0.25em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    color: rgb(242, 223, 119);
+    }
+
+    .month-box .english{
+      text-align: left;
+      font-size: 1.1rem;
+      padding: 0.75em;
+    }
+
+    .month-box .locked {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      opacity: 50%;
+    }
+
+    /*affect on current month*/
+    .month-box.highlight {
+     box-shadow: 0 0 12px rgb(179, 187, 189); 
+    }
+
+    
+  </style>
+
+</head>
+<body>
+  <div class="calendar-card">
+    <h1 style="color:rgb(134, 111, 34);">Hijri Calendar</h1> <!--145,144,87-->
+    <p id="hijri-date" class="last-update" style="color:rgb(1, 1, 31);"></p>
+    <!--<p style="color:rgb(1, 1, 31);">Hijri Date: 24 Dhul-Hijjah 1446</p>-->
+  </div>
+
+  <!--Update time in bottom right corner of screen-->
+  <p id="last-update" style="color:rgb(189, 174, 128); position: absolute; bottom: -5px; right: 25px;"></p>
+  <div class="calendar-grid">
+    <!--Muharram-->
+    <a href="muharram.html" class="month-box">
+      <div class="english">Muharram</div>
+      <div class="arabic">مُحَرَّم</div>
+    </a>
+
+<!-- Safr -->
+<div class="month-box">
+  <div class="english">Safar</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">صَفَر</div>
+</div>
+
+<!-- Rabi' al-awwal -->
+<div class="month-box">
+  <div class="english">Rabi' al-awwal</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">رَبِيع ٱلْأَوَّل</div>
+</div>
+
+<!-- Rabi' al-thani -->
+<div class="month-box">
+  <div class="english">Rabi' al-thani</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">رَبِيع ٱلثَّانِي</div>
+</div>
+
+<!-- Jumada al-awwal -->
+<div class="month-box">
+  <div class="english">Jumada al-awwal</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">جُمَادَىٰ ٱلْأُولَىٰ</div>
+</div>
+
+<!-- Jumada al-thani -->
+<div class="month-box">
+  <div class="english">Jumada al-thani</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">جُمَادَىٰ ٱلثَّانِيَة</div>
+</div>
+
+<!-- Rajab -->
+<div class="month-box">
+  <div class="english">Rajab</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">رَجَب</div>
+</div>
+
+<!-- Sha'ban -->
+<div class="month-box">
+  <div class="english">Sha'ban</div>
+  <div class="arabic">شَعْبَان</div>
+  <div class="locked">🔒</div>
+</div>
+
+<!-- Ramadan -->
+<div class="month-box">
+  <div class="english">Ramadan</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">رَمَضَان</div>
+</div>
+
+<!-- Shawwal -->
+<div class="month-box">
+  <div class="english">Shawwal</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">شَوَّال</div>
+</div>
+
+<!-- Dhu al-Qi'dah -->
+<div class="month-box">
+  <div class="english">Dhu al-Qi'dah</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">ذُو ٱلْقَعْدَة</div>
+</div>
+
+<!-- Dhu al-Hijjah -->
+<div class="month-box">
+  <div class="english">Dhu al-Hijjah</div>
+  <div class="locked">🔒</div>
+  <div class="arabic">ذُو ٱلْحِجَّة</div>
+</div>
+
+  </div>
+
+<script>
+//async allows us to use await and feitch data from api
+async function updateHijriDate() {
+  const response = await fetch('https://api.aladhan.com/v1/timings?latitude=43.65107&longitude=-79.347015&method=2');
+  const data = await response.json(); //translates into readable
+  const hijriDate = data.data.date.hijri; //takes the hijri date and stores it
+  const maghribTime = data.data.timings.Maghrib; //gets the maghrib time
+
+  // Get current time and maghrib time
+  const now = new Date(); //gets current date
+  const [maghribHour, maghribMinute] = maghribTime.split(':').map(Number);
+  const maghrib = new Date(now);
+  maghrib.setHours(maghribHour, maghribMinute, 0, 0);
+
+  let displayDay = parseInt(hijriDate.day);
+  let displayMonth = hijriDate.month.en;
+  let displayYear = parseInt(hijriDate.year);
+
+  // If it's after Maghrib, increment the Hijri date crudely
+  if (now >= maghrib && displayDay < 29) {
+    displayDay += 1;
+  }
+
+  //store hijri date in id and print it on the scree 
+  document.getElementById('hijri-date').innerText =
+    `Now: ${displayDay.toString().padStart(2, '0')} ${displayMonth} ${displayYear}`;
+
+  //store maghrib time in id
+  document.getElementById('last-update').innerText = 
+    `Updated at Maghrib: ${maghribTime}`;
+
+
+//code for shading the corrent month
+  //1. store the month in variable
+  let currentMonth = new Intl.DateTimeFormat('en-TN-u-ca-islamic', { month: 'long' }).format(new Date())
+  //2. find all instances on our pages that are under the class of month-box (the months)
+  const boxList = Array.from(document.querySelectorAll('.month-box'));
+  //3. within the array of months, find the specfic month-box that has the english value of a month that is equal to display month
+  const box = boxList.find(b=>b.querySelector('.english')?.innerText.trim() == currentMonth); //use ? to avoid error, b=>b is for functions
+  //4.if that box of month exists, add a highlight to it
+  if (box){
+    box.classList.add('highlight');
+  }
+ 
+}
+
+updateHijriDate();
+</script>
+
+</body>
+</html>

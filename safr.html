@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Arsenal' rel='stylesheet'>
+  <meta charset="UTF-8" />
+  <title>Safr</title>
+  <style>
+    body {
+      font-family: 'Arsenal';
+      text-align: center;
+      background: #000000; 
+      margin-top: 0.1em;
+      padding: 0.1em;
+    }
+
+.calendar-gridtwo {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 days per week */
+  gap: 0; /* No space between cells */
+  max-width: 1500px;
+  margin: 1em;
+  /*border: 1px solid #ffffff; /* Outer border if you want */
+}
+
+.day-cell {
+  position: relative;
+  border: 0.5px solid  rgb(250, 255, 184); /* Grid line around each cell */
+  box-shadow: 8px 3px 6px 0px rgba(217, 213, 85, 0.48); /* Glow effect */
+  aspect-ratio: 9 / 5;        /* Keeps cells square */
+  color: white;
+  font-size: 1rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Left edge tooltip */
+.day-cell::before {
+  content: attr(data-start);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-color: rgba(255,255,255,0.85);
+  color: rgb(255, 255, 255);
+  padding: 0.2em 0.5em;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  display: none;
+  white-space: nowrap;
+}
+
+/* Right edge tooltip */
+.day-cell::after {
+  content: attr(data-end);
+  position: absolute;
+  transform: translateX(100%);
+  top: 0;
+  right: 0;
+  background-color: rgba(228, 226, 146, 0.85);
+  color: rgb(0, 0, 0);
+  padding: 0.2em 0.5em;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  display: none;
+  white-space: nowrap;
+}
+
+/* Show on hover */
+.day-cell:hover::before,
+.day-cell:hover::after {
+  display: block;
+}
+
+  </style>
+
+</head>
+<body>
+
+  <h1 style="color:white;">Safr</h1>
+
+  <div class="calendar-gridtwo">
+    <!--java-->
+  </div>
+<script>
+  const grid = document.querySelector(".calendar-gridtwo");
+
+
+async function loadSafrCalendar() {
+  const hijriMonth = 2; // Muharram
+  const hijriYear = 1447;
+
+  const res = await fetch(`https://api.aladhan.com/v1/hToGCalendar/${hijriMonth}/${hijriYear}`);
+  const data = await res.json();
+
+  const dates = data.data;
+
+  // Get weekday of Muharram 1 (Sun=0, Mon=1, ..., Sat=6)
+  const startDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const firstWeekday = startDay.indexOf(dates[0].gregorian.weekday.en);
+
+  const grid = document.querySelector(".calendar-gridtwo");
+
+  // Fill empty cells before Safr 1
+  for (let i = 0; i < firstWeekday; i++) {
+    const empty = document.createElement("div");
+    empty.className = "day-cell";
+    grid.appendChild(empty);
+  }
+
+  // Fill Safr days
+  for (let i = 0; i < dates.length; i++) {
+    const cell = document.createElement("div");
+    cell.className = "day-cell";
+    cell.textContent = i + 1;
+
+
+//    const parts = dates[i].gregorian.date.split('-'); // e.g. "2025-06-25"
+//    const greg = new Date(Number(parts[0]), Number(parts[1]), Number(parts[2])); // YYYY, MM-1, DD
+//    const nextGreg = new Date(greg);
+//    nextGreg.setDate(greg.getDate() +1);
+
+//    const start = greg.toLocaleDateString("en-US", { month: "long", day: "numeric" }) + " Sunset";
+//    const end = nextGreg.toLocaleDateString("en-US", { month: "long", day: "numeric" }) + " Sunset";
+
+//    cell.setAttribute("data-start", start);
+//    cell.setAttribute("data-end", end);
+
+    grid.appendChild(cell);
+  }
+
+  // Fill remaining cells to reach 35
+  while (grid.children.length < 35) {
+    const empty = document.createElement("div");
+    empty.className = "day-cell";
+    grid.appendChild(empty);
+  }
+}
+
+loadSafrCalendar();
+
+</script>
+</body>
+</html>
